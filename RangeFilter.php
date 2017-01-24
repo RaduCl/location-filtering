@@ -8,10 +8,10 @@ class RangeFilter extends Db
 
     public function getItemsInRange($origin, $radius) {
         //echo $this->dbh;
-        $query = $this->dbh->prepare('SELECT * FROM items' );
+        $query = $this->dbh->prepare('SELECT * FROM :table WHERE type = :location');
         //echo $origin;
         $query->bindParam(':table', $this->table);
-        //$query->bindParam(':location', $origin);
+        $query->bindParam(':location', $origin);
         $query->execute();
         return $query->fetchAll();
     }
